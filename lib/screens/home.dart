@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:todo_app/constants/color.dart';
+import 'package:todo_app/constants/tasktype.dart';
+import 'package:todo_app/headerItem.dart';
+import 'package:todo_app/model/task.dart';
 import 'package:todo_app/screens/add_new_task.dart';
 import 'package:todo_app/todoItem.dart';
 
@@ -12,8 +15,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> todo = ["Study lesson", "Run 5k", "Go to party"];
-  List<String> compeleted = ["Game meetup", "Take out trash"];
+  //List<String> todo = ["Study lesson", "Run 5k", "Go to party"];
+  //List<String> compeleted = ["Game meetup", "Take out trash"];
+  List<String> header = ["May 5, 2024", "My Todo List"];
+
+  List<Task> todo = [
+    Task(
+      title: "Study lesson",
+      description: "study COMP117",
+      isCompleted: false,
+      type: TaskType.note,
+    ),
+    Task(
+      title: "Run 5k",
+      description: "run 5 km",
+      isCompleted: false,
+      type: TaskType.contest,
+    ),
+    Task(
+      title: "Go to party",
+      description: "attend to party",
+      isCompleted: false,
+      type: TaskType.calender,
+    )
+  ];
+
+  List<Task> completed = [
+    Task(
+      title: "Study lesson",
+      description: "study COMP117",
+      isCompleted: false,
+      type: TaskType.note,
+    ),
+    Task(
+      title: "Run 5k",
+      description: "run 5 km",
+      isCompleted: false,
+      type: TaskType.contest,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -27,37 +68,20 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             //Header
             Container(
-              width: deviceWidth,
-              height: deviceHeight / 3,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("lib/assets/images/header.png"),
-                      fit: BoxFit.cover)),
-              child: const Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 40),
-                    child: Text(
-                      "May 5, 2024",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 30),
-                    child: Text(
-                      "My Todo List",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-            ),
+                width: deviceWidth,
+                height: deviceHeight / 3,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("lib/assets/images/header.png"),
+                        fit: BoxFit.cover)),
+                child: ListView.builder(
+                  primary: true,
+                  shrinkWrap: true,
+                  itemCount: header.length,
+                  itemBuilder: (context, index) {
+                    return HeaderItem(title: header[index]);
+                  },
+                )),
             //Top column
             Expanded(
               child: Padding(
@@ -68,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemCount: todo.length,
                     itemBuilder: (context, index) {
-                      return TodoItem(title: todo[index]);
+                      return TodoItem(task: todo[index]);
                     },
                   ),
                 ),
@@ -93,9 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.builder(
                     primary: false,
                     shrinkWrap: true,
-                    itemCount: compeleted.length,
+                    itemCount: completed.length,
                     itemBuilder: (context, index) {
-                      return TodoItem(title: compeleted[index]);
+                      return TodoItem(task: completed[index]);
                     },
                   ),
                 ),
