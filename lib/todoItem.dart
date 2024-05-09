@@ -16,7 +16,9 @@ class _TodoItemState extends State<TodoItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: widget.task.isCompleted ? Colors.grey : Colors.white,
+        color: widget.task.isCompleted
+            ? const Color.fromARGB(255, 205, 204, 204)
+            : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: const EdgeInsets.all(15),
