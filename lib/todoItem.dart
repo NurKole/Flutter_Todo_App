@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:todo_app/constants/tasktype.dart';
 import 'package:todo_app/model/todo.dart';
 
 class TodoItem extends StatefulWidget {
